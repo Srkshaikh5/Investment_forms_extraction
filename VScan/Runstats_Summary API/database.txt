@@ -1,0 +1,4 @@
+Host: 192.168.202.24
+User: temp_vscan
+Password: temp_vscan
+Port: 3306

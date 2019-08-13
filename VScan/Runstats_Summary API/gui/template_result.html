@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Doc2Digital</title>
+    <!--<link rel="stylesheet" type="text/css" href="css/common.css">-->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/custom.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/common.css') }}">
+	<style>
+	.my-table {
+    overflow: auto;
+    height: 440px;
+		}
+
+	@media only screen and (min-width: 1024px)
+	.my-table {
+		overflow: auto;
+		height: 395px;
+	}
+
+	table.dataframe, .dataframe th, .dataframe td{
+	word-break: normal;
+	}
+	</style>
+</head>
+
+<body>
+    <section>
+        <div class="cm-container">
+            <h1 class="cm-hidden">Doc2Digital</h1>
+            <div class="bs-box typ-lg">
+                <div class="lyt-header">
+                    <div class="logo-wrapper">
+                        <a href="{{ url_for('static', filename='images/d2d-logo.svg') }}">
+                            <img src="{{ url_for('static', filename='images/d2d-logo.svg') }}" alt="d2d-logo">
+                            <!-- <img src="images/d2d-logo.svg" alt="d2d-logo"> -->
+                        </a>
+                    </div>
+                    <nav>
+                        <ul class="mod-menu">
+                            <li>
+                                <a href="http://192.168.202.80:8000/result" class="active">
+                                    <span class="menu-icon icon-verifications"></span>
+                                    <span class="menu-lbl">result</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+                <form action="http://192.168.202.80:8000/result" method="POST" class="form-container">
+                    <div class="form-wrapper typ-fullwidth">
+                        <div class="title-wrap">
+                            <h2 class="sec-title">Result</h2>
+                        </div>
+                       <ul class="task-status">
+                            <li class="form-list">
+                                <select name ="filterby">
+                                    <option value="" hidden>Select</option>
+                                    <option value="jobid">Job Id</option>
+                                    <option value="date">Date</option>
+<!--									/* <option value="cmpcode">Company Code</option>-->
+<!--									<option value="empcode">Employee Code</option>-->
+<!--									<option value="score">Score</option> */-->
+                                </select>
+                                <span class="icon"></span>
+                            </li>
+                            <li class="form-list">
+                                <span class="form-lbl lg"></span>
+                                <input type="text" class="form-control" placeholder="Search" name="tbox" autocomplete="on">
+                                <span class="icon"></span>
+                            </li>
+                        </ul>
+                        <!-- <h3 class="table-lbl">Scan Summary</h3> -->
+                        <div class="table my-table">
+                             {% if jid == '' %}
+                            {% for table in table1 %}
+                            {{ table|safe }}
+                            {% endfor %}
+                            {% else %}
+                            {% for table in table2 %}
+                            {{ table|safe }}
+                            {% endfor %}
+                            {% endif %}
+                            <!--<thead>
+                                <tr>
+                                    <th width="5%">
+                                        Job ID
+                                    </th>
+                                    <th width="10%">
+                                        Date
+                                    </th>
+                                    <th width="10%">
+                                        Start Time
+                                    </th>
+                                    <th width="10%">
+                                        End Time
+                                    </th>
+                                    <th width="10%">
+                                        File(s) Processed
+                                    </th>
+                                    <th width="10%">
+                                        Avg. Score
+                                    </th>
+                                    <th width="10%">
+                                        Avg. Score
+                                    </th>
+                                    <th width="10%">
+                                        Avg. Score
+                                    </th>
+                                    <th width="10%">
+                                        Avg. Score
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        V2Scan_2019_03_25_11:25:21
+                                    </td>
+                                    <td>
+                                        2019-2-20
+                                    </td>
+                                    <td>
+                                        11:58:38
+                                    </td>
+                                    <td>
+                                        11:58:18
+                                    </td>
+                                    <td>
+                                        4
+                                    </td>
+                                    <td>
+                                        85
+                                    </td>
+                                    <td>
+                                        85
+                                    </td>
+                                    <td>
+                                        85
+                                    </td>
+                                    <td>
+                                        85
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        V2Scan_2019_03_25_11:25:21
+                                    </td>
+                                    <td>
+                                        2019-2-20
+                                    </td>
+                                    <td>
+                                        11:58:38
+                                    </td>
+                                    <td>
+                                        11:58:18
+                                    </td>
+                                    <td>
+                                        4
+                                    </td>
+                                    <td>
+                                        85
+                                    </td>
+                                    <td>
+                                        85
+                                    </td>
+                                    <td>
+                                        85
+                                    </td>
+                                    <td>
+                                        85
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        V2Scan_2019_03_25_11:25:21
+                                    </td>
+                                    <td>
+                                        2019-2-20
+                                    </td>
+                                    <td>
+                                        11:58:38
+                                    </td>
+                                    <td>
+                                        11:58:18
+                                    </td>
+                                    <td>
+                                        4
+                                    </td>
+                                    <td>
+                                        85
+                                    </td>
+                                    <td>
+                                        85
+                                    </td>
+                                    <td>
+                                        85
+                                    </td>
+                                    <td>
+                                        85
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        V2Scan_2019_03_25_11:25:21
+                                    </td>
+                                    <td>
+                                        2019-2-20
+                                    </td>
+                                    <td>
+                                        11:58:38
+                                    </td>
+                                    <td>
+                                        11:58:18
+                                    </td>
+                                    <td>
+                                        4
+                                    </td>
+                                    <td>
+                                        85
+                                    </td>
+                                    <td>
+                                        85
+                                    </td>
+                                    <td>
+                                        85
+                                    </td>
+                                    <td>
+                                        85
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        V2Scan_2019_03_25_11:25:21
+                                    </td>
+                                    <td>
+                                        2019-2-20
+                                    </td>
+                                    <td>
+                                        11:58:38
+                                    </td>
+                                    <td>
+                                        11:58:18
+                                    </td>
+                                    <td>
+                                        4
+                                    </td>
+                                    <td>
+                                        85
+                                    </td>
+                                    <td>
+                                        85
+                                    </td>
+                                    <td>
+                                        85
+                                    </td>
+                                    <td>
+                                        85
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>
